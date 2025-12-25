@@ -3,13 +3,13 @@
     "titre": "Portfolio",
     "description": "Ce portfolio dynamique !",
     "image": "https://via.placeholder.com/300",
-    "lien": "#accueil"
+    "lien": ""
   },
   {
     "titre": "Mon premier site",
     "description": "Un site vitrine simple réalisé en HTML et CSS.",
     "image": "https://via.placeholder.com/300",
-    "lien": "#"
+    "lien": ""
   },
   {
     "titre": "Application To-Do",
