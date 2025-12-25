@@ -1,0 +1,26 @@
+[
+  {
+    "titre": "Portfolio",
+    "description": "Ce portfolio dynamique !",
+    "image": "https://via.placeholder.com/300",
+    "lien": "#"
+  },
+  {
+    "titre": "Mon premier site",
+    "description": "Un site vitrine simple réalisé en HTML et CSS.",
+    "image": "https://via.placeholder.com/300",
+    "lien": "#"
+  },
+  {
+    "titre": "Application To-Do",
+    "description": "Une liste de tâches interactive en JavaScript.",
+    "image": "https://via.placeholder.com/300",
+    "lien": "#"
+  },
+  {
+    "titre": "Site de gestion",
+    "description": "Un site de gestion de devis et commandes réalisé en HTML, CSS, PHP, MySQL, JavaScript. (Projet professionnel -> demander l'accès via le formulaire de contact)",
+    "image": "https://pro.aas33.com/logo.png",
+    "lien": "https://pro.aas33.com/"
+  }
+]

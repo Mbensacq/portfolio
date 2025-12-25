@@ -1,0 +1,388 @@
+/* Reset basique */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+  background-color: #1a1a1a;
+  color: #f0f0f0;
+  line-height: 1.6;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* En-tête avec effet Glassmorphism */
+header {
+  padding: 20px;
+  background-color: rgba(37, 37, 37, 0.9); /* Légèrement transparent */
+  backdrop-filter: blur(10px); /* L'effet de flou derrière le menu */
+  -webkit-backdrop-filter: blur(10px); /* Pour Safari */
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+nav h1 {
+  font-size: 1.5rem;
+  color: #4caf50;
+  font-weight: 800;
+  letter-spacing: 1px;
+}
+
+nav ul {
+  list-style: none;
+  display: flex;
+  gap: 20px;
+}
+
+nav a {
+  text-decoration: none;
+  color: #fff;
+  font-weight: 500;
+  transition: color 0.3s;
+}
+
+nav a:hover {
+  color: #4caf50;
+}
+
+/* Sections */
+section {
+  padding: 80px 20px;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+/* Hero Section */
+.hero {
+  text-align: center;
+  padding: 120px 20px;
+}
+
+.hero h2 {
+  font-size: 3.5em;
+  margin-bottom: 20px;
+  background: linear-gradient(to right, #4caf50, #8bc34a);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent; /* Titre en dégradé */
+}
+
+.hero p {
+  font-size: 1.2rem;
+  color: #ccc;
+  max-width: 600px;
+  margin: 0 auto 30px auto;
+}
+
+/* Bouton Appel à l'action */
+.btn-cta {
+  display: inline-block;
+  padding: 12px 30px;
+  background-color: #4caf50;
+  color: white;
+  text-decoration: none;
+  border-radius: 30px;
+  font-weight: bold;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.btn-cta:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 5px 15px rgba(76, 175, 80, 0.4);
+}
+
+/* Grille des projets */
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 25px;
+  margin-top: 40px;
+}
+
+.card {
+  background-color: #2c2c2c;
+  border-radius: 12px;
+  padding: 20px;
+  transition: transform 0.3s, box-shadow 0.3s;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.card:hover {
+  transform: translateY(-7px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+}
+
+.card img {
+  width: 100%;
+  border-radius: 8px;
+  margin-bottom: 15px;
+  object-fit: cover;
+  height: 180px; /* Force toutes les images à la même hauteur */
+}
+
+.card h3 {
+  margin-bottom: 10px;
+  color: #fff;
+}
+
+.card p {
+  font-size: 0.95rem;
+  color: #aaa;
+  margin-bottom: 15px;
+}
+
+/* Footer & Socials */
+footer {
+  text-align: center;
+  padding: 40px;
+  background-color: #151515;
+  margin-top: 50px;
+  border-top: 1px solid #333;
+}
+
+.social-links {
+  margin-bottom: 20px;
+}
+.social-links a {
+  color: #ccc;
+  margin: 0 10px;
+  text-decoration: none;
+  font-size: 1.1rem;
+  transition: color 0.3s;
+}
+.social-links a:hover {
+  color: #4caf50;
+}
+
+/* --- Section Contact --- */
+.contact-section {
+  text-align: center;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.contact-info {
+  margin-bottom: 30px;
+  font-size: 1.1rem;
+}
+
+.contact-info a {
+  color: #4caf50;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.contact-form {
+  text-align: left;
+  background: #252525;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 600;
+  color: #ddd;
+}
+
+input,
+textarea {
+  width: 100%;
+  padding: 12px;
+  background-color: #333;
+  border: 1px solid #444;
+  border-radius: 6px;
+  color: #fff;
+  font-size: 1rem;
+  transition: border-color 0.3s;
+}
+
+input:focus,
+textarea:focus {
+  outline: none;
+  border-color: #4caf50;
+  background-color: #3a3a3a;
+}
+
+.btn-submit {
+  width: 100%;
+  padding: 14px;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 1.1rem;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s;
+}
+
+.btn-submit:hover {
+  background-color: #45a049;
+}
+
+/* --- Section Compétences --- */
+.skills-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 15px;
+  margin-top: 30px;
+}
+
+.skill-tag {
+  background-color: #2c2c2c;
+  color: #fff;
+  padding: 10px 25px;
+  border-radius: 50px;
+  border: 1px solid #4caf50;
+  font-weight: 500;
+  font-size: 0.95rem;
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+.skill-tag:hover {
+  background-color: #4caf50;
+  transform: scale(1.05);
+  cursor: default;
+}
+
+/* --- Animation d'arrière-plan --- */
+@keyframes gradientBG {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+body {
+  background: linear-gradient(-45deg, #121212, #1f1f1f, #181818);
+  background-size: 400% 400%;
+  animation: gradientBG 15s ease infinite;
+}
+
+/* --- Animations Scroll Reveal --- */
+.reveal {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: all 0.8s ease-out;
+}
+.reveal.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Hero Animations */
+.hero-animate {
+  animation: fadeInUp 1s ease-out forwards;
+  opacity: 0;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* --- Mobile Burger --- */
+.burger {
+  display: none;
+  cursor: pointer;
+}
+
+.burger div {
+  width: 25px;
+  height: 3px;
+  background-color: #fff;
+  margin: 5px;
+  transition: all 0.3s ease;
+}
+
+@media screen and (max-width: 768px) {
+  body {
+    overflow-x: hidden;
+  }
+
+  .burger {
+    display: block;
+    z-index: 1001;
+  } /* Z-index > nav-links */
+
+  .nav-links {
+    position: fixed; /* Mieux que absolute pour le mobile */
+    right: 0;
+    height: 100vh;
+    top: 0;
+    background-color: #1a1a1a;
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Centre verticalement */
+    align-items: center;
+    width: 70%; /* Un peu plus large pour le confort */
+    transform: translateX(100%);
+    transition: transform 0.4s ease-in-out;
+    z-index: 1000; /* Juste en dessous du burger */
+    box-shadow: -5px 0 15px rgba(0, 0, 0, 0.5);
+  }
+
+  .nav-active {
+    transform: translateX(0%);
+  }
+
+  .nav-links li {
+    margin: 25px 0;
+    opacity: 0;
+  }
+
+  @keyframes navLinkFade {
+    from {
+      opacity: 0;
+      transform: translateX(50px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  .toggle .line1 {
+    transform: rotate(-45deg) translate(-5px, 6px);
+  }
+  .toggle .line2 {
+    opacity: 0;
+  }
+  .toggle .line3 {
+    transform: rotate(45deg) translate(-5px, -6px);
+  }
+}

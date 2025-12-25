@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio de Mathis Bensacq - Développeur Génie Logiciel</title>
+    <meta name="description" content="Portfolio de Mathis Bensacq, étudiant en Master 1 Informatique à l'Université de Bordeaux, spécialisation Génie Logiciel.">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header>
+        <nav>
+            <h1>Mathis.Dev</h1> <div class="burger">
+                <div class="line1"></div>
+                <div class="line2"></div>
+                <div class="line3"></div>
+            </div>
+
+            <ul class="nav-links">
+                <li><a href="#accueil">Accueil</a></li>
+                <li><a href="#competences">Compétences</a></li>
+                <li><a href="#projets">Projets</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section id="accueil" class="hero">
+        <h2 class="hero-animate">Bonjour, je suis Mathis Bensacq</h2>
+        <p class="hero-animate" style="animation-delay: 0.3s;">
+            Étudiant de 21 ans en <strong>Master 1 Informatique</strong> à l'Université de Bordeaux.<br>
+            Futur ingénieur spécialisé en <strong>Génie Logiciel</strong>.
+        </p>
+        <a href="#contact" class="btn-cta hero-animate" style="animation-delay: 0.6s;">Me contacter</a>
+    </section>
+
+    <section id="competences" class="reveal">
+        <h2>Mes Compétences</h2>
+        <div class="skills-container">
+            <span class="skill-tag">Génie Logiciel</span>
+            <span class="skill-tag">Java / C++</span>
+            <span class="skill-tag">Web (HTML/CSS/JS)</span>
+            <span class="skill-tag">Base de Données</span>
+            <span class="skill-tag">Git & GitHub</span>
+            <span class="skill-tag">Agile / Scrum</span>
+        </div>
+    </section>
+
+    <section id="projets" class="reveal">
+        <h2>Mes Projets Universitaires & Personnels</h2>
+        <div id="liste-projets" class="grid-container"></div>
+    </section>
+
+    <section id="contact" class="contact-section reveal">
+        <h2>Travaillons ensemble</h2>
+        <p>Une opportunité de stage ou un projet ? Je suis à votre écoute.</p>
+        
+        <div class="contact-info">
+            <p>📞 <a href="tel:+33651958694">06 51 95 86 94</a></p>
+            <p>📍 Bordeaux, France</p>
+        </div>
+
+        <form action="https://formspree.io/f/xpqaeeeb" method="POST" class="contact-form">
+            <div class="form-group">
+                <label for="name">Votre Nom</label>
+                <input type="text" id="name" name="name" required placeholder="Recruteur / Collaborateur">
+            </div>
+
+            <div class="form-group">
+                <label for="email">Votre Email</label>
+                <input type="email" id="email" name="email" required placeholder="email@entreprise.com">
+            </div>
+
+            <div class="form-group">
+                <label for="message">Votre Message</label>
+                <textarea id="message" name="message" rows="5" required placeholder="Bonjour Mathis, j'ai vu votre profil..."></textarea>
+            </div>
+
+            <button type="submit" class="btn-submit">Envoyer</button>
+        </form>
+    </section>
+
+    <footer>
+        <div class="social-links">
+            <a href="https://github.com/" target="_blank">GitHub</a>
+            <a href="https://linkedin.com/" target="_blank">LinkedIn</a>
+        </div>
+        <p>&copy; 2025 Mathis Bensacq. Tous droits réservés.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
