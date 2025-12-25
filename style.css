@@ -73,6 +73,7 @@ section {
   margin-bottom: 20px;
   background: linear-gradient(to right, #4caf50, #8bc34a);
   -webkit-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
