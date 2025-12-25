@@ -6,12 +6,6 @@
     "lien": ""
   },
   {
-    "titre": "Mon premier site",
-    "description": "Un site vitrine simple réalisé en HTML et CSS.",
-    "image": "https://via.placeholder.com/300",
-    "lien": ""
-  },
-  {
     "titre": "Application To-Do",
     "description": "Une liste de tâches interactive en JavaScript.",
     "image": "https://via.placeholder.com/300",
