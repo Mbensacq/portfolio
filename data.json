@@ -7,8 +7,8 @@
   },
   {
     "titre": "ProTask Dashboard",
-    "description": "Application SPA en Vanilla JS (ES6+). Architecture MVC simplifiée, gestion du DOM avancée, API Drag & Drop et Thèmes CSS dynamiques.",
-    "image": "images/screenshot-todo.png", 
+    "description": "Application SPA et PWA en Vanilla JS (ES6+). Architecture MVC simplifiée, gestion du DOM avancée, API Drag & Drop, Thèmes CSS dynamiques et fonctionnement hors ligne via Service Workers.",
+    "image": "images/screenshot-todo.png",
     "lien": "https://mbensacq.github.io/todos/"
   },
   {
