@@ -16,5 +16,11 @@
     "description": "Solution complète en PHP 8 & MySQL (PDO). Gestion des rôles (RBAC Admin/Client), configurateur de prix dynamique en JS, workflow de validation, génération de PDF natifs et notifications email automatisées.",
     "image": "https://pro.aas33.com/logo.png",
     "lien": "https://pro.aas33.com/"
+  },
+  {
+    "titre": "Questify - Application de gestion de tâches",
+    "description": "TODO",
+    "image": "https://via.placeholder.com/300",
+    "lien": "https://mbensacq.github.io/Questify/"
   }
 ]
