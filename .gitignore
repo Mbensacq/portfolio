@@ -1,0 +1,7 @@
+# Outillage Claude Code & notes de travail (hors dépôt public)
+.claude/
+tasks/
+
+# OS / éditeurs
+.DS_Store
+Thumbs.db
