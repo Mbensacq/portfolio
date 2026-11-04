@@ -1,0 +1,705 @@
+/* ==========================================================================
+   Jetons
+   Marine #1b2a3f : la couleur du CV, reprise pour la bande latérale.
+   Bordeaux #8e2442 : seul accent, réservé aux liens et au focus.
+   ========================================================================== */
+:root {
+  --navy: #1b2a3f;
+  --navy-deep: #142031;
+  --paper: #f6f7f9;
+  --white: #ffffff;
+  --ink: #1b2a3f;
+  --text: #364254;
+  --muted: #5e6878;
+  --rule: #dce0e6;
+  --wine: #8e2442;
+  --wine-dark: #6f1a33;
+
+  --band-text: #f6f7f9;
+  --band-muted: #aab5c5;
+  --band-rule: rgb(246 247 249 / 0.16);
+
+  --font: 'Schibsted Grotesk Variable', 'Segoe UI', system-ui, -apple-system, sans-serif;
+
+  /* Échelle typographique, base 17 px */
+  --step--1: 0.9375rem;
+  --step-0: 1.0625rem;
+  --step-1: 1.25rem;
+  --step-2: 1.625rem;
+  --step-3: clamp(1.625rem, 1.1rem + 2.1vw, 2.625rem);
+  --step-name: clamp(2rem, 1.55rem + 1.6vw, 2.75rem);
+
+  --band-width: clamp(18rem, 26vw, 23rem);
+  --content-max: 46rem;
+  --meta-width: 9.5rem;
+  --radius: 6px;
+
+  color-scheme: light;
+}
+
+/* ==========================================================================
+   Base
+   ========================================================================== */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--text);
+  font-family: var(--font);
+  font-size: var(--step-0);
+  line-height: 1.6;
+  font-optical-sizing: auto;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1,
+h2,
+h3,
+h4,
+p,
+ul,
+ol,
+dl,
+dd {
+  margin: 0;
+}
+
+ul,
+ol {
+  padding: 0;
+  list-style: none;
+}
+
+::selection {
+  background: var(--wine);
+  color: var(--white);
+}
+
+a {
+  color: var(--ink);
+  text-decoration-line: underline;
+  text-decoration-color: var(--wine);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.22em;
+}
+
+a:hover {
+  color: var(--wine);
+  text-decoration-thickness: 2px;
+}
+
+:focus-visible {
+  outline: 2px solid var(--wine);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+
+.skip-link {
+  position: absolute;
+  top: 0.75rem;
+  left: 0.75rem;
+  z-index: 10;
+  padding: 0.6rem 1rem;
+  background: var(--white);
+  color: var(--ink);
+  border-radius: var(--radius);
+  transform: translateY(-200%);
+}
+
+.skip-link:focus-visible {
+  transform: none;
+}
+
+/* ==========================================================================
+   Mise en page : bande fixe à gauche, contenu qui défile à droite
+   ========================================================================== */
+.layout {
+  display: grid;
+  grid-template-columns: var(--band-width) minmax(0, 1fr);
+  min-height: 100vh;
+}
+
+.content {
+  width: 100%;
+  max-width: calc(var(--content-max) + 2 * clamp(1.25rem, 5vw, 5rem));
+  padding: clamp(3rem, 7vh, 5.5rem) clamp(1.25rem, 5vw, 5rem) 3rem;
+}
+
+.content:focus {
+  outline: none;
+}
+
+/* ==========================================================================
+   Bande latérale
+   ========================================================================== */
+.band {
+  background: var(--navy);
+  color: var(--band-text);
+}
+
+.band__inner {
+  position: sticky;
+  top: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1.75rem;
+  height: 100vh;
+  height: 100dvh;
+  overflow-y: auto;
+  padding: clamp(2.5rem, 7vh, 5.5rem) clamp(1.5rem, 2.6vw, 2.5rem) 2rem;
+}
+
+/* Écran peu haut : la navigation cède la place à l'essentiel (identité, CV, contact) */
+@media (max-height: 46rem) {
+  .band__nav {
+    display: none;
+  }
+}
+
+.band a {
+  color: var(--band-text);
+  text-decoration-color: rgb(246 247 249 / 0.45);
+}
+
+.band a:hover {
+  color: var(--white);
+  text-decoration-color: var(--white);
+}
+
+.band :focus-visible {
+  outline-color: var(--band-text);
+}
+
+.band__name {
+  font-size: var(--step-name);
+  font-weight: 750;
+  line-height: 1.02;
+  letter-spacing: -0.025em;
+  color: var(--white);
+}
+
+.band__title {
+  margin-top: 0.85rem;
+  font-size: var(--step-1);
+  font-weight: 500;
+  line-height: 1.3;
+}
+
+.band__stack {
+  margin-top: 0.35rem;
+  color: var(--band-muted);
+  font-size: var(--step--1);
+}
+
+.band__availability {
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--band-rule);
+}
+
+.band__availability-headline {
+  font-weight: 650;
+  color: var(--white);
+}
+
+.band__availability-detail {
+  margin-top: 0.2rem;
+  color: var(--band-muted);
+  font-size: var(--step--1);
+  line-height: 1.5;
+}
+
+.band__actions {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.75rem;
+}
+
+.button {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.35rem;
+  padding: 0.7rem 1.1rem;
+  border-radius: var(--radius);
+  font-weight: 600;
+  line-height: 1.2;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.band .button--primary {
+  background: var(--band-text);
+  color: var(--navy);
+}
+
+.band .button--primary:hover {
+  background: var(--white);
+  color: var(--navy);
+}
+
+.band .button--secondary {
+  box-shadow: inset 0 0 0 1px rgb(246 247 249 / 0.5);
+  color: var(--band-text);
+}
+
+.band .button--secondary:hover {
+  box-shadow: inset 0 0 0 1px var(--white);
+  color: var(--white);
+}
+
+.button__meta {
+  font-size: 0.8125rem;
+  font-weight: 450;
+  opacity: 0.75;
+}
+
+.band__links {
+  display: flex;
+  gap: 1.25rem;
+}
+
+.band__nav {
+  margin-top: auto;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--band-rule);
+}
+
+.band__nav ul {
+  display: grid;
+  gap: 0.15rem;
+}
+
+.band__nav a {
+  display: inline-block;
+  padding: 0.2rem 0;
+  color: var(--band-muted);
+  font-size: var(--step--1);
+  text-decoration: none;
+}
+
+.band__nav a:hover {
+  color: var(--white);
+  text-decoration: underline;
+}
+
+/* ==========================================================================
+   Introduction
+   ========================================================================== */
+.intro__lead {
+  max-width: 24ch;
+  font-size: var(--step-3);
+  font-weight: 650;
+  line-height: 1.14;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+  text-wrap: balance;
+}
+
+.intro__text {
+  max-width: 62ch;
+  margin-top: 1.25rem;
+  font-size: 1.125rem;
+  text-wrap: pretty;
+}
+
+.intro__lead + .intro__text {
+  margin-top: 2rem;
+}
+
+/* ==========================================================================
+   Sections
+   ========================================================================== */
+.section {
+  margin-top: clamp(3.5rem, 9vh, 5.5rem);
+  scroll-margin-top: 2rem;
+}
+
+.section__title {
+  padding-bottom: 0.75rem;
+  border-bottom: 2px solid var(--navy);
+  font-size: var(--step-2);
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.015em;
+  color: var(--ink);
+}
+
+.stack {
+  margin-top: 0.75rem;
+  color: var(--muted);
+  font-size: var(--step--1);
+}
+
+.muted {
+  color: var(--muted);
+}
+
+/* Entrées datées (expérience, formation) : période à gauche, contenu à droite */
+.entry {
+  display: grid;
+  grid-template-columns: var(--meta-width) minmax(0, 1fr);
+  column-gap: 1.5rem;
+  padding-block: 1.5rem;
+}
+
+.entry + .entry {
+  border-top: 1px solid var(--rule);
+}
+
+.entry__meta {
+  padding-top: 0.15rem;
+  color: var(--muted);
+  font-size: var(--step--1);
+  font-variant-numeric: tabular-nums;
+}
+
+.entry__body {
+  max-width: 62ch;
+}
+
+.entry__title {
+  font-size: var(--step-1);
+  font-weight: 650;
+  line-height: 1.3;
+  color: var(--ink);
+}
+
+.entry__contract {
+  font-weight: 450;
+  color: var(--muted);
+}
+
+.entry__subtitle {
+  margin-top: 0.15rem;
+  color: var(--muted);
+}
+
+.entry__highlights {
+  display: grid;
+  gap: 0.45rem;
+  margin-top: 1rem;
+}
+
+.entry__highlights li {
+  position: relative;
+  padding-left: 1.1rem;
+}
+
+.entry__highlights li::before {
+  content: '';
+  position: absolute;
+  top: 0.72em;
+  left: 0;
+  width: 0.45rem;
+  height: 2px;
+  background: var(--navy);
+}
+
+.entry__follow-up {
+  margin-top: 1.5rem;
+  padding-left: 1rem;
+  border-left: 2px solid var(--rule);
+}
+
+.entry__follow-up-title {
+  font-size: var(--step-0);
+  font-weight: 650;
+  color: var(--ink);
+}
+
+.entry__follow-up-period {
+  font-weight: 450;
+  color: var(--muted);
+}
+
+.entry__follow-up p {
+  margin-top: 0.25rem;
+}
+
+/* ==========================================================================
+   Projets
+   ========================================================================== */
+.project {
+  padding-block: 1.75rem;
+}
+
+.project + .project {
+  border-top: 1px solid var(--rule);
+}
+
+.project article {
+  max-width: 62ch;
+}
+
+.project__name {
+  font-size: var(--step-1);
+  font-weight: 700;
+  line-height: 1.3;
+  color: var(--ink);
+}
+
+.project__tagline {
+  color: var(--muted);
+}
+
+.project__description {
+  margin-top: 0.75rem;
+  text-wrap: pretty;
+}
+
+.project__links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1.5rem;
+  margin-top: 0.9rem;
+  font-weight: 600;
+}
+
+.project__private {
+  color: var(--muted);
+  font-weight: 450;
+  font-size: var(--step--1);
+}
+
+/* ==========================================================================
+   Compétences
+   ========================================================================== */
+.skills {
+  padding-top: 0.5rem;
+}
+
+.skills__row {
+  display: grid;
+  grid-template-columns: var(--meta-width) minmax(0, 1fr);
+  column-gap: 1.5rem;
+  padding-block: 0.8rem;
+}
+
+.skills__row + .skills__row {
+  border-top: 1px solid var(--rule);
+}
+
+.skills dt {
+  color: var(--muted);
+  font-size: var(--step--1);
+  padding-top: 0.1rem;
+}
+
+.skills dd {
+  color: var(--ink);
+}
+
+/* ==========================================================================
+   Contact et pied de page
+   ========================================================================== */
+.contact {
+  padding-top: 1.5rem;
+}
+
+.contact__lead {
+  max-width: 40ch;
+  font-size: var(--step-1);
+  line-height: 1.4;
+  color: var(--ink);
+}
+
+.contact__email {
+  display: inline-block;
+  margin-top: 1rem;
+  font-size: var(--step-2);
+  font-weight: 650;
+  letter-spacing: -0.01em;
+  overflow-wrap: anywhere;
+}
+
+.contact__links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1.5rem;
+  margin-top: 1.25rem;
+}
+
+.footer {
+  margin-top: clamp(4rem, 10vh, 6rem);
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--rule);
+  color: var(--muted);
+  font-size: var(--step--1);
+}
+
+/* ==========================================================================
+   Tablette et mobile : la bande passe en tête de page
+   ========================================================================== */
+@media (max-width: 60rem) {
+  .layout {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .band__inner {
+    position: static;
+    height: auto;
+    overflow: visible;
+    gap: 1.5rem;
+    padding: 2.5rem clamp(1.25rem, 5vw, 3rem) 2rem;
+  }
+
+  .band__actions {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  .band__nav {
+    display: none;
+  }
+
+  .content {
+    max-width: none;
+    padding-top: 2.75rem;
+  }
+
+  .content > * {
+    max-width: var(--content-max);
+  }
+}
+
+@media (max-width: 36rem) {
+  :root {
+    --step-0: 1.0625rem;
+  }
+
+  .entry,
+  .skills__row {
+    grid-template-columns: minmax(0, 1fr);
+    row-gap: 0.25rem;
+  }
+
+  .entry__meta {
+    padding-top: 0;
+  }
+
+  .intro__text {
+    font-size: var(--step-0);
+  }
+
+  .band__inner {
+    gap: 1.25rem;
+    padding: 2rem 1.25rem 1.75rem;
+  }
+
+  .band__availability {
+    padding-top: 1rem;
+  }
+
+  .contact__email {
+    font-size: var(--step-1);
+  }
+}
+
+/* ==========================================================================
+   Impression
+   ========================================================================== */
+@media print {
+  @page {
+    margin: 1.6cm 1.8cm;
+  }
+
+  :root {
+    --paper: #ffffff;
+  }
+
+  body {
+    font-size: 11pt;
+  }
+
+  .layout {
+    display: block;
+  }
+
+  .band {
+    background: none;
+    color: var(--ink);
+  }
+
+  .band__inner {
+    position: static;
+    height: auto;
+    overflow: visible;
+    padding: 0 0 1rem;
+    gap: 0.75rem;
+  }
+
+  .band__name {
+    color: var(--ink);
+  }
+
+  .band__stack,
+  .band__availability-detail {
+    color: var(--muted);
+  }
+
+  .band__availability-headline {
+    color: var(--ink);
+  }
+
+  .band__availability {
+    border-top-color: var(--rule);
+  }
+
+  .band__actions,
+  .band__nav,
+  .band__links,
+  .skip-link,
+  .footer {
+    display: none;
+  }
+
+  .content {
+    max-width: none;
+    padding: 0;
+  }
+
+  .section {
+    margin-top: 1.75rem;
+    break-inside: avoid-page;
+  }
+
+  .entry,
+  .project {
+    break-inside: avoid;
+  }
+
+  .project__links a[href^='http']::after,
+  .contact__links a[href^='http']::after {
+    content: ' (' attr(href) ')';
+    font-weight: 400;
+    color: var(--muted);
+  }
+}
