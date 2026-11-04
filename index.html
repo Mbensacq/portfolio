@@ -1,93 +1,49 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portfolio de Mathis Bensacq - Développeur Génie Logiciel</title>
-    <meta name="description" content="Portfolio de Mathis Bensacq, étudiant en Master 1 Informatique à l'Université de Bordeaux, spécialisation Génie Logiciel.">
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Mathis Bensacq, développeur full stack à Bordeaux</title>
+    <meta
+      name="description"
+      content="Développeur full stack junior (TypeScript, React, Node.js, SQL), disponible immédiatement pour un CDI à Bordeaux et dans sa métropole. Expérience, projets et CV."
+    />
+    <meta name="theme-color" content="#1b2a3f" />
+    <meta name="color-scheme" content="light" />
+    <link rel="canonical" href="https://mbensacq.github.io/portfolio/" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
 
-    <header>
-        <nav>
-            <h1>Portfolio</h1>
-            <div class="burger">
-                <div class="line1"></div>
-                <div class="line2"></div>
-                <div class="line3"></div>
-            </div>
-            <ul class="nav-links">
-                <li><a href="#accueil">Accueil</a></li>
-                <li><a href="#competences">Compétences</a></li>
-                <li><a href="#projets">Projets</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
-        </nav>
-    </header>
+    <meta property="og:type" content="profile" />
+    <meta property="og:locale" content="fr_FR" />
+    <meta property="og:url" content="https://mbensacq.github.io/portfolio/" />
+    <meta property="og:title" content="Mathis Bensacq, développeur full stack à Bordeaux" />
+    <meta
+      property="og:description"
+      content="TypeScript, React, Node.js, SQL. Disponible immédiatement pour un CDI à Bordeaux et dans sa métropole."
+    />
+    <meta property="og:image" content="https://mbensacq.github.io/portfolio/og-image.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Mathis Bensacq, développeur full stack junior à Bordeaux" />
+    <meta property="profile:first_name" content="Mathis" />
+    <meta property="profile:last_name" content="Bensacq" />
+    <meta name="twitter:card" content="summary_large_image" />
 
-    <section id="accueil" class="hero">
-        <h2 class="hero-animate">Bonjour, je suis Mathis Bensacq</h2>
-        <p class="hero-animate" style="animation-delay: 0.3s;">
-            Étudiant de 21 ans en <strong>Master 1 Informatique</strong> à l'Université de Bordeaux.<br>
-            Futur ingénieur spécialisé en <strong>Génie Logiciel</strong>.
-        </p>
-        <a href="#contact" class="btn-cta hero-animate" style="animation-delay: 0.6s;">Me contacter</a>
-    </section>
-
-    <section id="competences" class="reveal">
-        <h2>Mes Compétences</h2>
-        <div class="skills-container">
-            <span class="skill-tag">Génie Logiciel</span>
-            <span class="skill-tag">Java / C++</span>
-            <span class="skill-tag">Web (HTML/CSS/JS)</span>
-            <span class="skill-tag">Base de Données</span>
-            <span class="skill-tag">Git & GitHub</span>
-            <span class="skill-tag">Agile / Scrum</span>
-        </div>
-    </section>
-
-    <section id="projets" class="reveal">
-        <h2>Mes Projets Personnels</h2>
-        <div id="liste-projets" class="grid-container"></div>
-    </section>
-
-    <section id="contact" class="contact-section reveal">
-        <h2>Me Contacter</h2>
-        
-        <div class="contact-info">
-            <p>📞 <a href="tel:+33651958694">06 51 95 86 94</a></p>
-            <p>📍 Bordeaux, France</p>
-        </div>
-
-        <form action="https://formspree.io/f/xpqaeeeb" method="POST" class="contact-form">
-            <div class="form-group">
-                <label for="name">Votre Nom</label>
-                <input type="text" id="name" name="name" required placeholder="Recruteur / Collaborateur">
-            </div>
-
-            <div class="form-group">
-                <label for="email">Votre Email</label>
-                <input type="email" id="email" name="email" required placeholder="email@entreprise.com">
-            </div>
-
-            <div class="form-group">
-                <label for="message">Votre Message</label>
-                <textarea id="message" name="message" rows="5" required placeholder="Bonjour Mathis, j'ai vu votre profil..."></textarea>
-            </div>
-
-            <button type="submit" class="btn-submit">Envoyer</button>
-        </form>
-    </section>
-
-    <footer>
-        <div class="social-links">
-            <a href="https://github.com/" target="_blank">GitHub</a>
-            <a href="https://linkedin.com/" target="_blank">LinkedIn</a>
-        </div>
-        <p>&copy; 2025 Mathis Bensacq. Tous droits réservés.</p>
-    </footer>
-
-    <script src="script.js"></script>
-</body>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Mathis Bensacq",
+        "jobTitle": "Développeur full stack junior",
+        "url": "https://mbensacq.github.io/portfolio/",
+        "email": "mailto:bensacqmathis@gmail.com",
+        "address": { "@type": "PostalAddress", "addressLocality": "Bordeaux", "addressCountry": "FR" },
+        "sameAs": ["https://www.linkedin.com/in/mathis-bensacq", "https://github.com/Mbensacq"]
+      }
+    </script>
+  </head>
+  <body>
+    <div id="root"><!--app-html--></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
 </html>
