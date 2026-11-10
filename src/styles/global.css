@@ -1,11 +1,10 @@
 /* ==========================================================================
    Jetons
    Marine #1b2a3f : la couleur du CV, reprise pour la bande latérale.
-   Bordeaux #8e2442 : seul accent, réservé aux liens et au focus.
+   Bordeaux #8e2442 : seul accent (chiffres clés, repères, liens, focus).
    ========================================================================== */
 :root {
   --navy: #1b2a3f;
-  --navy-deep: #142031;
   --paper: #f6f7f9;
   --white: #ffffff;
   --ink: #1b2a3f;
@@ -13,7 +12,6 @@
   --muted: #5e6878;
   --rule: #dce0e6;
   --wine: #8e2442;
-  --wine-dark: #6f1a33;
 
   --band-text: #f6f7f9;
   --band-muted: #aab5c5;
@@ -26,13 +24,17 @@
   --step-0: 1.0625rem;
   --step-1: 1.25rem;
   --step-2: 1.625rem;
-  --step-3: clamp(1.625rem, 1.1rem + 2.1vw, 2.625rem);
+  --step-3: clamp(1.625rem, 1.25rem + 1vw, 2rem);
+  --step-lead: clamp(1.75rem, 1.05rem + 2.3vw, 3.25rem);
+  --step-figure: clamp(2.5rem, 2rem + 1.4vw, 3.25rem);
   --step-name: clamp(2rem, 1.55rem + 1.6vw, 2.75rem);
 
-  --band-width: clamp(18rem, 26vw, 23rem);
-  --content-max: 46rem;
-  --meta-width: 9.5rem;
+  --band-width: clamp(17rem, 23vw, 20.5rem);
+  --content-max: 66rem;
+  --gutter: clamp(1.25rem, 4vw, 3.5rem);
   --radius: 6px;
+  --radius-large: 10px;
+  --shadow: 0 18px 40px rgb(27 42 63 / 0.14);
 
   color-scheme: light;
 }
@@ -84,6 +86,10 @@ ul,
 ol {
   padding: 0;
   list-style: none;
+}
+
+img {
+  max-width: 100%;
 }
 
 ::selection {
@@ -138,8 +144,23 @@ a:hover {
   transform: none;
 }
 
+.kicker {
+  color: var(--wine);
+  font-size: var(--step--1);
+  font-weight: 600;
+}
+
+.stack,
+.muted {
+  color: var(--muted);
+}
+
+.stack {
+  font-size: var(--step--1);
+}
+
 /* ==========================================================================
-   Mise en page : bande fixe à gauche, contenu qui défile à droite
+   Mise en page : bande fixe à gauche, contenu centré dans l'espace restant
    ========================================================================== */
 .layout {
   display: grid;
@@ -148,13 +169,17 @@ a:hover {
 }
 
 .content {
-  width: 100%;
-  max-width: calc(var(--content-max) + 2 * clamp(1.25rem, 5vw, 5rem));
-  padding: clamp(3rem, 7vh, 5.5rem) clamp(1.25rem, 5vw, 5rem) 3rem;
+  min-width: 0;
+  padding: clamp(3rem, 7vh, 5.5rem) var(--gutter) 3rem;
 }
 
 .content:focus {
   outline: none;
+}
+
+.content__inner {
+  max-width: var(--content-max);
+  margin-inline: auto;
 }
 
 /* ==========================================================================
@@ -174,7 +199,7 @@ a:hover {
   height: 100vh;
   height: 100dvh;
   overflow-y: auto;
-  padding: clamp(2.5rem, 7vh, 5.5rem) clamp(1.5rem, 2.6vw, 2.5rem) 2rem;
+  padding: clamp(2.5rem, 7vh, 5.5rem) clamp(1.5rem, 2.4vw, 2.25rem) 2rem;
 }
 
 /* Écran peu haut : la navigation cède la place à l'essentiel (identité, CV, contact) */
@@ -204,6 +229,16 @@ a:hover {
   line-height: 1.02;
   letter-spacing: -0.025em;
   color: var(--white);
+}
+
+.band__name a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.band__name a:hover {
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
 }
 
 .band__title {
@@ -255,22 +290,22 @@ a:hover {
   white-space: nowrap;
 }
 
-.band .button--primary {
+.band .button--light {
   background: var(--band-text);
   color: var(--navy);
 }
 
-.band .button--primary:hover {
+.band .button--light:hover {
   background: var(--white);
   color: var(--navy);
 }
 
-.band .button--secondary {
+.band .button--outline-light {
   box-shadow: inset 0 0 0 1px rgb(246 247 249 / 0.5);
   color: var(--band-text);
 }
 
-.band .button--secondary:hover {
+.band .button--outline-light:hover {
   box-shadow: inset 0 0 0 1px var(--white);
   color: var(--white);
 }
@@ -299,7 +334,8 @@ a:hover {
 
 .band__nav a {
   display: inline-block;
-  padding: 0.2rem 0;
+  padding: 0.2rem 0 0.2rem 0.85rem;
+  border-left: 2px solid transparent;
   color: var(--band-muted);
   font-size: var(--step--1);
   text-decoration: none;
@@ -310,15 +346,21 @@ a:hover {
   text-decoration: underline;
 }
 
+.band__nav a[aria-current] {
+  border-left-color: var(--white);
+  color: var(--white);
+  font-weight: 600;
+}
+
 /* ==========================================================================
-   Introduction
+   Introduction et chiffres clés
    ========================================================================== */
 .intro__lead {
-  max-width: 24ch;
-  font-size: var(--step-3);
-  font-weight: 650;
-  line-height: 1.14;
-  letter-spacing: -0.02em;
+  max-width: 21ch;
+  font-size: var(--step-lead);
+  font-weight: 700;
+  line-height: 1.08;
+  letter-spacing: -0.03em;
   color: var(--ink);
   text-wrap: balance;
 }
@@ -334,17 +376,141 @@ a:hover {
   margin-top: 2rem;
 }
 
+.facts {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(15rem, 100%), 1fr));
+  gap: 2rem 3rem;
+  margin-top: clamp(2.5rem, 6vh, 4rem);
+  padding: 2rem;
+  background: var(--white);
+  border: 1px solid var(--rule);
+  border-radius: var(--radius-large);
+}
+
+.fact__value {
+  display: block;
+  margin-bottom: 0.4rem;
+  color: var(--wine);
+  font-size: var(--step-figure);
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -0.03em;
+  font-variant-numeric: tabular-nums;
+}
+
 /* ==========================================================================
    Sections
    ========================================================================== */
 .section {
-  margin-top: clamp(3.5rem, 9vh, 5.5rem);
+  margin-top: clamp(4rem, 10vh, 6rem);
   scroll-margin-top: 2rem;
 }
 
-.section__title {
-  padding-bottom: 0.75rem;
+.section__header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.35rem 2rem;
+  padding-bottom: 0.85rem;
   border-bottom: 2px solid var(--navy);
+}
+
+.section__title {
+  font-size: var(--step-3);
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+}
+
+.section__intro {
+  max-width: 46ch;
+  color: var(--muted);
+  font-size: var(--step--1);
+  text-wrap: pretty;
+}
+
+/* ==========================================================================
+   Projets : grandes lignes avec capture, puis cartes
+   ========================================================================== */
+.capture {
+  display: block;
+  width: 100%;
+  height: auto;
+  border: 1px solid var(--rule);
+  border-radius: var(--radius-large);
+  box-shadow: var(--shadow);
+}
+
+.features {
+  display: grid;
+  gap: clamp(2.5rem, 6vh, 4rem);
+  margin-top: clamp(2rem, 5vh, 3.5rem);
+}
+
+.feature__article {
+  display: grid;
+  grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+  align-items: center;
+  gap: 2rem clamp(1.75rem, 3vw, 3rem);
+}
+
+/* Une ligne sur deux : la capture passe à droite. */
+.feature:nth-child(even) .feature__article {
+  grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+}
+
+.feature:nth-child(even) .feature__media {
+  order: 2;
+}
+
+.feature__body,
+.card__article {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.feature__name {
+  font-size: var(--step-3);
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+}
+
+.feature__tagline {
+  font-size: var(--step-1);
+  line-height: 1.35;
+  color: var(--ink);
+}
+
+.feature__description,
+.card__description {
+  text-wrap: pretty;
+}
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(17rem, 100%), 1fr));
+  gap: 1.25rem;
+  margin-top: clamp(2.5rem, 6vh, 4rem);
+}
+
+.card {
+  display: flex;
+  background: var(--white);
+  border: 1px solid var(--rule);
+  border-radius: var(--radius-large);
+}
+
+.card__article {
+  flex: 1;
+  padding: 1.6rem;
+}
+
+.card__name {
   font-size: var(--step-2);
   font-weight: 700;
   line-height: 1.2;
@@ -352,168 +518,322 @@ a:hover {
   color: var(--ink);
 }
 
-.stack {
-  margin-top: 0.75rem;
+.card__tagline {
+  font-weight: 550;
+  color: var(--ink);
+}
+
+/* Les liens restent alignés en bas de carte, quelle que soit la longueur du texte. */
+.card .project-links {
+  margin-top: auto;
+  padding-top: 0.6rem;
+}
+
+.project-links {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.4rem 1.5rem;
+  font-weight: 600;
+}
+
+.project-links__private {
   color: var(--muted);
+  font-weight: 450;
   font-size: var(--step--1);
 }
 
-.muted {
-  color: var(--muted);
-}
-
-/* Entrées datées (expérience, formation) : période à gauche, contenu à droite */
-.entry {
+/* ==========================================================================
+   Expérience
+   ========================================================================== */
+.experience {
   display: grid;
-  grid-template-columns: var(--meta-width) minmax(0, 1fr);
-  column-gap: 1.5rem;
-  padding-block: 1.5rem;
+  grid-template-columns: minmax(0, 4fr) minmax(0, 7fr);
+  gap: 1.5rem clamp(1.75rem, 3vw, 3rem);
+  padding-block: 2rem;
 }
 
-.entry + .entry {
+.experience + .experience {
   border-top: 1px solid var(--rule);
 }
 
-.entry__meta {
-  padding-top: 0.15rem;
+.experience__summary {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.experience__period {
   color: var(--muted);
   font-size: var(--step--1);
   font-variant-numeric: tabular-nums;
 }
 
-.entry__body {
-  max-width: 62ch;
-}
-
-.entry__title {
-  font-size: var(--step-1);
-  font-weight: 650;
-  line-height: 1.3;
+.experience__role {
+  font-size: var(--step-2);
+  font-weight: 700;
+  line-height: 1.25;
+  letter-spacing: -0.01em;
   color: var(--ink);
 }
 
-.entry__contract {
+.experience__contract {
   font-weight: 450;
   color: var(--muted);
 }
 
-.entry__subtitle {
-  margin-top: 0.15rem;
+.experience__company {
   color: var(--muted);
 }
 
-.entry__highlights {
+.experience__summary .stack {
+  margin-top: 0.5rem;
+}
+
+.experience__highlights {
   display: grid;
-  gap: 0.45rem;
-  margin-top: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(min(15rem, 100%), 1fr));
+  gap: 1.5rem 2rem;
 }
 
-.entry__highlights li {
-  position: relative;
-  padding-left: 1.1rem;
+.experience__highlights li {
+  padding-top: 0.85rem;
+  border-top: 2px solid var(--wine);
 }
 
-.entry__highlights li::before {
-  content: '';
-  position: absolute;
-  top: 0.72em;
-  left: 0;
-  width: 0.45rem;
-  height: 2px;
-  background: var(--navy);
+.experience__follow-up {
+  margin-top: 2rem;
+  padding: 1.25rem 1.5rem;
+  background: var(--white);
+  border: 1px solid var(--rule);
+  border-radius: var(--radius-large);
 }
 
-.entry__follow-up {
-  margin-top: 1.5rem;
-  padding-left: 1rem;
-  border-left: 2px solid var(--rule);
-}
-
-.entry__follow-up-title {
+.experience__follow-up-title {
   font-size: var(--step-0);
   font-weight: 650;
   color: var(--ink);
 }
 
-.entry__follow-up-period {
+.experience__follow-up-period {
   font-weight: 450;
   color: var(--muted);
 }
 
-.entry__follow-up p {
+.experience__follow-up p {
   margin-top: 0.25rem;
 }
 
 /* ==========================================================================
-   Projets
-   ========================================================================== */
-.project {
-  padding-block: 1.75rem;
-}
-
-.project + .project {
-  border-top: 1px solid var(--rule);
-}
-
-.project article {
-  max-width: 62ch;
-}
-
-.project__name {
-  font-size: var(--step-1);
-  font-weight: 700;
-  line-height: 1.3;
-  color: var(--ink);
-}
-
-.project__tagline {
-  color: var(--muted);
-}
-
-.project__description {
-  margin-top: 0.75rem;
-  text-wrap: pretty;
-}
-
-.project__links {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem 1.5rem;
-  margin-top: 0.9rem;
-  font-weight: 600;
-}
-
-.project__private {
-  color: var(--muted);
-  font-weight: 450;
-  font-size: var(--step--1);
-}
-
-/* ==========================================================================
-   Compétences
+   Compétences et formation
    ========================================================================== */
 .skills {
-  padding-top: 0.5rem;
-}
-
-.skills__row {
   display: grid;
-  grid-template-columns: var(--meta-width) minmax(0, 1fr);
-  column-gap: 1.5rem;
-  padding-block: 0.8rem;
-}
-
-.skills__row + .skills__row {
-  border-top: 1px solid var(--rule);
+  grid-template-columns: repeat(auto-fit, minmax(min(13rem, 100%), 1fr));
+  gap: 1.75rem 2rem;
+  padding-top: 2rem;
 }
 
 .skills dt {
-  color: var(--muted);
+  margin-bottom: 0.3rem;
+  color: var(--wine);
   font-size: var(--step--1);
-  padding-top: 0.1rem;
+  font-weight: 600;
 }
 
 .skills dd {
+  color: var(--ink);
+}
+
+.education {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(15rem, 100%), 1fr));
+  gap: 1.75rem 2rem;
+  padding-top: 2rem;
+}
+
+.education__period {
+  margin-bottom: 0.3rem;
+  color: var(--muted);
+  font-size: var(--step--1);
+  font-variant-numeric: tabular-nums;
+}
+
+.education__degree {
+  font-size: var(--step-0);
+  font-weight: 650;
+  line-height: 1.35;
+  color: var(--ink);
+}
+
+.education__school {
+  color: var(--muted);
+}
+
+/* ==========================================================================
+   Page d'un projet
+   ========================================================================== */
+.project-page__back {
+  font-size: var(--step--1);
+  font-weight: 600;
+}
+
+.project-page__back a::before {
+  content: '← ';
+}
+
+.project-page__header {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  margin-top: 2rem;
+}
+
+.project-page__name {
+  font-size: clamp(2.5rem, 1.6rem + 3.2vw, 4.25rem);
+  font-weight: 750;
+  line-height: 1;
+  letter-spacing: -0.035em;
+  color: var(--ink);
+}
+
+.project-page__tagline {
+  max-width: 40ch;
+  font-size: var(--step-2);
+  line-height: 1.3;
+  color: var(--ink);
+  text-wrap: balance;
+}
+
+.project-page__header .project-links {
+  margin-top: 0.75rem;
+}
+
+.project-page__media {
+  margin-top: clamp(2rem, 5vh, 3.5rem);
+}
+
+.project-page__columns {
+  display: grid;
+  grid-template-columns: minmax(0, 7fr) minmax(0, 4fr);
+  align-items: start;
+  gap: 2rem clamp(1.75rem, 4vw, 4rem);
+  margin-top: clamp(2.5rem, 6vh, 4rem);
+}
+
+.project-page__heading {
+  font-size: var(--step-2);
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.015em;
+  color: var(--ink);
+}
+
+.project-page__main > .project-page__heading:not(:first-child) {
+  margin-top: 2.5rem;
+}
+
+.project-page__description {
+  max-width: 62ch;
+  margin-top: 0.85rem;
+  font-size: 1.125rem;
+  text-wrap: pretty;
+}
+
+.project-page__highlights {
+  display: grid;
+  gap: 1rem;
+  max-width: 62ch;
+  margin-top: 1.25rem;
+}
+
+.project-page__highlights li {
+  padding-top: 0.85rem;
+  border-top: 2px solid var(--wine);
+}
+
+.project-page__aside {
+  padding: 1.5rem;
+  background: var(--white);
+  border: 1px solid var(--rule);
+  border-radius: var(--radius-large);
+}
+
+.project-page__aside-title {
+  color: var(--wine);
+  font-size: var(--step--1);
+  font-weight: 600;
+}
+
+.project-page__stack {
+  margin-top: 0.6rem;
+  color: var(--ink);
+}
+
+.project-page__stack li + li {
+  margin-top: 0.35rem;
+  padding-top: 0.35rem;
+  border-top: 1px solid var(--rule);
+}
+
+.project-page__others {
+  margin-top: clamp(4rem, 10vh, 6rem);
+}
+
+.project-page__others .project-page__heading {
+  padding-bottom: 0.85rem;
+  border-bottom: 2px solid var(--navy);
+}
+
+.project-page__others ul {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(13rem, 100%), 1fr));
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.project-page__others li {
+  display: flex;
+}
+
+.project-page__others a {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 0.25rem;
+  padding: 1.1rem 1.25rem;
+  background: var(--white);
+  border: 1px solid var(--rule);
+  border-radius: var(--radius-large);
+  text-decoration: none;
+}
+
+.project-page__others a:hover {
+  border-color: var(--wine);
+}
+
+.project-page__other-name {
+  font-size: var(--step-1);
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.project-page__other-tagline {
+  color: var(--muted);
+  font-size: var(--step--1);
+  line-height: 1.45;
+}
+
+.not-found {
+  display: grid;
+  gap: 1rem;
+}
+
+.not-found__title {
+  font-size: var(--step-lead);
+  font-weight: 700;
+  line-height: 1.08;
+  letter-spacing: -0.03em;
   color: var(--ink);
 }
 
@@ -521,7 +841,7 @@ a:hover {
    Contact et pied de page
    ========================================================================== */
 .contact {
-  padding-top: 1.5rem;
+  padding-top: 2rem;
 }
 
 .contact__lead {
@@ -534,9 +854,10 @@ a:hover {
 .contact__email {
   display: inline-block;
   margin-top: 1rem;
-  font-size: var(--step-2);
-  font-weight: 650;
-  letter-spacing: -0.01em;
+  font-size: clamp(1.5rem, 1.1rem + 1.7vw, 2.5rem);
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
   overflow-wrap: anywhere;
 }
 
@@ -545,6 +866,7 @@ a:hover {
   flex-wrap: wrap;
   gap: 0.5rem 1.5rem;
   margin-top: 1.25rem;
+  font-weight: 600;
 }
 
 .footer {
@@ -553,6 +875,25 @@ a:hover {
   border-top: 1px solid var(--rule);
   color: var(--muted);
   font-size: var(--step--1);
+}
+
+/* ==========================================================================
+   Écran moyen : la capture et le texte d'un projet s'empilent
+   ========================================================================== */
+@media (max-width: 78rem) {
+  .feature__article,
+  .feature:nth-child(even) .feature__article,
+  .experience {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .feature:nth-child(even) .feature__media {
+    order: 0;
+  }
+
+  .feature__body {
+    max-width: 62ch;
+  }
 }
 
 /* ==========================================================================
@@ -568,7 +909,7 @@ a:hover {
     height: auto;
     overflow: visible;
     gap: 1.5rem;
-    padding: 2.5rem clamp(1.25rem, 5vw, 3rem) 2rem;
+    padding: 2.5rem var(--gutter) 2rem;
   }
 
   .band__actions {
@@ -581,31 +922,17 @@ a:hover {
   }
 
   .content {
-    max-width: none;
     padding-top: 2.75rem;
   }
 
-  .content > * {
-    max-width: var(--content-max);
+  .project-page__columns {
+    grid-template-columns: minmax(0, 1fr);
   }
 }
 
 @media (max-width: 36rem) {
-  :root {
-    --step-0: 1.0625rem;
-  }
-
-  .entry,
-  .skills__row {
-    grid-template-columns: minmax(0, 1fr);
-    row-gap: 0.25rem;
-  }
-
-  .entry__meta {
-    padding-top: 0;
-  }
-
-  .intro__text {
+  .intro__text,
+  .project-page__description {
     font-size: var(--step-0);
   }
 
@@ -618,8 +945,8 @@ a:hover {
     padding-top: 1rem;
   }
 
-  .contact__email {
-    font-size: var(--step-1);
+  .facts {
+    padding: 1.5rem;
   }
 }
 
@@ -656,17 +983,15 @@ a:hover {
     gap: 0.75rem;
   }
 
-  .band__name {
+  .band__name,
+  .band__name a,
+  .band__availability-headline {
     color: var(--ink);
   }
 
   .band__stack,
   .band__availability-detail {
     color: var(--muted);
-  }
-
-  .band__availability-headline {
-    color: var(--ink);
   }
 
   .band__availability {
@@ -677,26 +1002,36 @@ a:hover {
   .band__nav,
   .band__links,
   .skip-link,
-  .footer {
+  .footer,
+  .project-page__back,
+  .project-page__others {
     display: none;
   }
 
   .content {
-    max-width: none;
     padding: 0;
+  }
+
+  .content__inner {
+    max-width: none;
+  }
+
+  .capture {
+    box-shadow: none;
   }
 
   .section {
     margin-top: 1.75rem;
-    break-inside: avoid-page;
   }
 
-  .entry,
-  .project {
+  .feature,
+  .card,
+  .experience,
+  .fact {
     break-inside: avoid;
   }
 
-  .project__links a[href^='http']::after,
+  .project-links a[href^='http']::after,
   .contact__links a[href^='http']::after {
     content: ' (' attr(href) ')';
     font-weight: 400;

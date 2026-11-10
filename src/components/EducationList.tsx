@@ -7,21 +7,24 @@ interface EducationListProps {
 
 export function EducationList({ items, languages }: EducationListProps) {
   return (
-    <ol className="entries">
+    <ol className="education">
       {items.map((item) => (
-        <li key={item.id} className="entry">
-          <p className="entry__meta">{item.period}</p>
-          <div className="entry__body">
-            <h3 className="entry__title">{item.degree}</h3>
-            <p className="entry__subtitle">{item.school}</p>
-          </div>
+        <li key={item.id} className="education__item">
+          <p className="education__period">{item.period}</p>
+          <h3 className="education__degree">{item.degree}</h3>
+          <p className="education__school">{item.school}</p>
         </li>
       ))}
-      <li className="entry">
-        <p className="entry__meta">Langues</p>
-        <div className="entry__body">
-          <p>{languages.map((language) => `${language.name} (${language.level})`).join(', ')}</p>
-        </div>
+      <li className="education__item">
+        <p className="education__period">Langues</p>
+        <ul className="education__languages">
+          {languages.map((language) => (
+            <li key={language.name}>
+              <span className="education__degree">{language.name}</span>
+              <span className="education__school">, {language.level}</span>
+            </li>
+          ))}
+        </ul>
       </li>
     </ol>
   );

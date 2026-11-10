@@ -24,6 +24,13 @@ export interface Profile {
   siteUrl: string;
 }
 
+/** Chiffre clé mis en avant sous l'introduction. */
+export interface Fact {
+  id: string;
+  value: string;
+  text: string;
+}
+
 export interface Experience {
   id: string;
   period: string;
@@ -43,12 +50,26 @@ export interface Experience {
 /** Où se trouve le code d'un projet : dépôt public lié, ou dépôt privé montré sur demande. */
 export type ProjectCode = { kind: 'public'; href: string } | { kind: 'private' };
 
+/** Capture d'écran d'un projet, servie depuis public/captures/. */
+export interface ProjectImage {
+  fileName: string;
+  alt: string;
+  width: number;
+  height: number;
+}
+
 export interface Project {
+  /** Sert aussi de segment d'URL : /projets/<id>/ */
   id: string;
   name: string;
+  /** Angle technique du projet, en quelques mots. */
+  kicker: string;
   tagline: string;
   description: string;
+  /** Points techniques détaillés sur la page du projet. */
+  highlights: readonly string[];
   stack: readonly string[];
+  image?: ProjectImage;
   demo?: string;
   code: ProjectCode;
 }
