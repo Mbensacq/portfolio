@@ -4,6 +4,7 @@ import './styles/global.css';
 import { StrictMode } from 'react';
 import { createRoot, hydrateRoot } from 'react-dom/client';
 import { App } from './App';
+import { stripBase } from './routing';
 
 const container = document.getElementById('root');
 if (!container) {
@@ -12,11 +13,11 @@ if (!container) {
 
 const app = (
   <StrictMode>
-    <App />
+    <App path={stripBase(window.location.pathname, import.meta.env.BASE_URL)} />
   </StrictMode>
 );
 
-// En production, le HTML est prérendu au build (scripts/prerender.mjs) : on l'hydrate.
+// En production, chaque page est prérendue au build (scripts/prerender.mjs) : on l'hydrate.
 // En développement, #root ne contient qu'un commentaire : rendu côté client.
 if (container.firstElementChild) {
   hydrateRoot(container, app);

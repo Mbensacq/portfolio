@@ -1,49 +1,77 @@
 import type { Project } from '../content/types';
-import { ExternalLink } from './ExternalLink';
+import { ProjectImage } from './ProjectImage';
+import { ProjectLinks } from './ProjectLinks';
 
 interface ProjectListProps {
   items: readonly Project[];
 }
 
-export function ProjectList({ items }: ProjectListProps) {
+function Stack({ items }: { items: readonly string[] }) {
   return (
-    <ul className="projects">
-      {items.map((project) => {
-        const headingId = `projet-${project.id}`;
-        return (
-          <li key={project.id} className="project">
-            <article aria-labelledby={headingId}>
-              <h3 id={headingId} className="project__name">
-                {project.name}
-              </h3>
-              <p className="project__tagline">{project.tagline}</p>
-              <p className="project__description">{project.description}</p>
-              <p className="stack">
-                <span className="sr-only">Technologies utilisées : </span>
-                {project.stack.join(', ')}
-              </p>
-              <ul className="project__links">
-                {project.demo ? (
-                  <li>
-                    <ExternalLink href={project.demo}>
-                      Démo en ligne<span className="sr-only"> de {project.name}</span>
-                    </ExternalLink>
-                  </li>
-                ) : null}
-                <li>
-                  {project.code.kind === 'public' ? (
-                    <ExternalLink href={project.code.href}>
-                      Code source<span className="sr-only"> de {project.name}</span>
-                    </ExternalLink>
-                  ) : (
-                    <span className="project__private">Dépôt privé, code montré sur demande</span>
-                  )}
-                </li>
-              </ul>
-            </article>
-          </li>
-        );
-      })}
-    </ul>
+    <p className="stack">
+      <span className="sr-only">Technologies utilisées : </span>
+      {items.join(', ')}
+    </p>
+  );
+}
+
+/** Projets avec capture en grandes lignes alternées, puis les autres en cartes. */
+export function ProjectList({ items }: ProjectListProps) {
+  const featured = items.filter((project) => project.image !== undefined);
+  const others = items.filter((project) => project.image === undefined);
+
+  return (
+    <div className="projects">
+      {featured.length > 0 ? (
+        <ul className="features">
+          {featured.map((project) => {
+            const headingId = `projet-${project.id}`;
+            return (
+              <li key={project.id} className="feature">
+                <article aria-labelledby={headingId} className="feature__article">
+                  {project.image ? (
+                    <div className="feature__media">
+                      <ProjectImage image={project.image} />
+                    </div>
+                  ) : null}
+                  <div className="feature__body">
+                    <p className="kicker">{project.kicker}</p>
+                    <h3 id={headingId} className="feature__name">
+                      {project.name}
+                    </h3>
+                    <p className="feature__tagline">{project.tagline}</p>
+                    <p className="feature__description">{project.description}</p>
+                    <Stack items={project.stack} />
+                    <ProjectLinks project={project} showDetails />
+                  </div>
+                </article>
+              </li>
+            );
+          })}
+        </ul>
+      ) : null}
+
+      {others.length > 0 ? (
+        <ul className="cards">
+          {others.map((project) => {
+            const headingId = `projet-${project.id}`;
+            return (
+              <li key={project.id} className="card">
+                <article aria-labelledby={headingId} className="card__article">
+                  <p className="kicker">{project.kicker}</p>
+                  <h3 id={headingId} className="card__name">
+                    {project.name}
+                  </h3>
+                  <p className="card__tagline">{project.tagline}</p>
+                  <p className="card__description">{project.description}</p>
+                  <Stack items={project.stack} />
+                  <ProjectLinks project={project} showDetails />
+                </article>
+              </li>
+            );
+          })}
+        </ul>
+      ) : null}
+    </div>
   );
 }

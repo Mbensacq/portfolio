@@ -1,57 +1,48 @@
 import { Contact } from './components/Contact';
-import { EducationList } from './components/EducationList';
-import { ExperienceList } from './components/ExperienceList';
 import { ExternalLink } from './components/ExternalLink';
-import { ProjectList } from './components/ProjectList';
 import { Section } from './components/Section';
 import { Sidebar } from './components/Sidebar';
-import { SkillList } from './components/SkillList';
-import { education, experiences, languages, profile, projects, skills } from './content/data';
+import { profile } from './content/data';
+import { HomePage } from './pages/HomePage';
+import { NotFoundPage } from './pages/NotFoundPage';
+import { ProjectPage } from './pages/ProjectPage';
+import { resolveRoute } from './routing';
 
-export function App() {
+interface AppProps {
+  /** Chemin de la page, relatif à la base du site : « / », « /projets/atlas/ ». */
+  path: string;
+}
+
+export function App({ path }: AppProps) {
+  const route = resolveRoute(path);
+
   return (
     <div className="layout">
       <a className="skip-link" href="#contenu">
         Aller au contenu
       </a>
-      <Sidebar />
+      <Sidebar
+        isHome={route.kind === 'home'}
+        currentSection={route.kind === 'project' ? 'projets' : null}
+      />
 
       <main id="contenu" className="content" tabIndex={-1}>
-        <div className="intro">
-          <p className="intro__lead">{profile.lead}</p>
-          {profile.intro.map((paragraph) => (
-            <p key={paragraph} className="intro__text">
-              {paragraph}
+        <div className="content__inner">
+          {route.kind === 'home' ? <HomePage /> : null}
+          {route.kind === 'project' ? <ProjectPage project={route.project} /> : null}
+          {route.kind === 'not-found' ? <NotFoundPage /> : null}
+
+          <Section id="contact">
+            <Contact />
+          </Section>
+
+          <footer className="footer">
+            <p>
+              <ExternalLink href={profile.sourceCode}>Code source de ce site</ExternalLink> (React,
+              TypeScript, Vite)
             </p>
-          ))}
+          </footer>
         </div>
-
-        <Section id="experience">
-          <ExperienceList items={experiences} />
-        </Section>
-
-        <Section id="projets">
-          <ProjectList items={projects} />
-        </Section>
-
-        <Section id="competences">
-          <SkillList groups={skills} />
-        </Section>
-
-        <Section id="formation">
-          <EducationList items={education} languages={languages} />
-        </Section>
-
-        <Section id="contact">
-          <Contact />
-        </Section>
-
-        <footer className="footer">
-          <p>
-            <ExternalLink href={profile.sourceCode}>Code source de ce site</ExternalLink> (React, TypeScript,
-            Vite)
-          </p>
-        </footer>
       </main>
     </div>
   );

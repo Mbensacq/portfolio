@@ -1,9 +1,8 @@
 import { profile } from '../content/data';
+import { publicUrl } from '../routing';
 import { ExternalLink } from './ExternalLink';
 
 export function Contact() {
-  const cvHref = `${import.meta.env.BASE_URL}${profile.cv.fileName}`;
-
   return (
     <div className="contact">
       <p className="contact__lead">
@@ -22,7 +21,7 @@ export function Contact() {
           <ExternalLink href={profile.github.href}>{profile.github.label}</ExternalLink>
         </li>
         <li>
-          <a href={cvHref} download>
+          <a href={publicUrl(profile.cv.fileName)} download>
             CV au format PDF
           </a>
         </li>
